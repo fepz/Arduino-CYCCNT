@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "cyccnt.h"
 
-uint32_t ulDelayTime;
+uint32_t cycles;
 
 void function(void);
 
@@ -10,16 +10,27 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   Serial.println("Testing CYCCNT.");
 }
-
+/**
+ * Para medir la ejecución de un código en ciclos:
+ *    STOPWATCH_RESET();
+ *    cycles = CPU_CYCLES;
+ *    // codigo que se quiera medir
+ *    cycles = CPU_CYCLES - cycles;
+ * 
+ * En la variable cycles queda el número aproximado de ciclos de CPU consumidos.
+ * La variable cycles debe de ser de tipo uint32_t.
+ * 
+ * A continuación un breve ejemplo:
+ */
 void loop() {
   STOPWATCH_RESET();
-  ulDelayTime = CPU_CYCLES;
+  cycles = CPU_CYCLES;
   function();
-  ulDelayTime = CPU_CYCLES - ulDelayTime;
+  cycles = CPU_CYCLES - cycles;
   Serial.print("Cycles: ");
-  Serial.println(ulDelayTime, DEC);
+  Serial.println(cycles, DEC); // imprime ciclos
   Serial.print("ms: ");
-  Serial.println(ulDelayTime / 84000, DEC);
+  Serial.println(cycles / 84000, DEC); // imprime ms aproximados
   delay(1);
 }
 
