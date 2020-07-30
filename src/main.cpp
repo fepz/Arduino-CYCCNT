@@ -31,14 +31,14 @@ void loop() {
   Serial.println(cycles, DEC); // imprime ciclos
   Serial.print("ms: ");
   Serial.println(cycles / 84000, DEC); // imprime ms aproximados
-  delay(1);
+  delay(1000);
 }
 
 void function() {
   digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
   Serial.println("Led ON");
-  delay(250);                       // wait for a second
+  delay(250);                       // wait
   digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
   Serial.println("Led OFF");
-  delay(250);                       // wait for a second
+  delay(250);                       // wait
 }
